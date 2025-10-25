@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import ResumeNavigater4 from "../public/Resume navigater 4.png";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 
 function PersnalInfoForm() {
   const router = useRouter();
+    const [loading,setloading]=useState(false)
+  
   const [skillsFields, setskillsFields] = useState<string>("");
   const [AddedskillsFields, setAddedskillsFields] = useState<string[]>([]);
 
@@ -35,7 +37,13 @@ function PersnalInfoForm() {
     }
   };
 const SaveInLocalHost = () => {
+  setTimeout(() => {
       localStorage.setItem("skills", JSON.stringify(AddedskillsFields));
+      
+    
+      setloading(true)
+      router.push('/summary')
+    }, 100);
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("skills");
@@ -107,11 +115,12 @@ const SaveInLocalHost = () => {
             Back
           </Button>
 
-          <Link href="/summary">
-            <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] w-[100px]" onClick={()=>SaveInLocalHost()}>
+          
+            <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] w-[100px]" disabled={loading==true} onClick={()=>SaveInLocalHost()}>
+              {loading==true?<Loader2/>:""}
               Next
             </Button>
-          </Link>
+          
         </div>
       </div>
 

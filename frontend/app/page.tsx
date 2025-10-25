@@ -6,12 +6,6 @@ import HomeSlider from "@/components/slider/HomeSlider";
 // import { useEffect } from "react";
 export default function Home() {
 
-  // useEffect(()=>{
-  //   APiData()
-  // },[])
-  // console.log(data);
-  
-
   return (
    
     <>

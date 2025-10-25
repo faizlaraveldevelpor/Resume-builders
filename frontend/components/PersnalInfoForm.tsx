@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import ResumeNavigater from "../public/Resume navigater 1.png";
 import Image from "next/image";
 import { PersonalInfo } from "@/types/usestateTypes";
-
+import {Loader2} from 'lucide-react'
 function PersonalInfoForm() {
   const router = useRouter();
 
@@ -21,13 +21,17 @@ function PersonalInfoForm() {
     phone: "",
     Profession:""
   });
-
+const [loading,setloading]=useState(false)
   // universal onChange handler
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   const SaveInLocalHost = () => {
+    setTimeout(() => {
     localStorage.setItem("persnalInformation", JSON.stringify(formData));
+    router.push('/experience')
+      setloading(true)
+    }, 100);
   };
   useEffect(() => {
     const LocalstorageData = localStorage.getItem("persnalInformation");
@@ -146,14 +150,15 @@ if (LocalstorageData) {
           >
             Back
           </Button>
-          <Link href={"/experience"}>
+        
             <Button
               className="bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]"
               onClick={() => SaveInLocalHost()}
-            >
+           disabled={loading} >
+              {loading==true?<Loader2/>:""}
               Next
             </Button>
-          </Link>
+          
         </div>
       </div>
       <div>

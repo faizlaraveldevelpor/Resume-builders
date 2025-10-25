@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ResumeNavigater2 from '../public/Resume navigator 2.png'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ExperienceData } from '@/types/usestateTypes'
-import { Trash } from 'lucide-react'
+import { Loader2, Trash } from 'lucide-react'
 
 type EducationFormProps = {
   setExperience: React.Dispatch<React.SetStateAction<ExperienceData[]>>;
@@ -15,6 +15,7 @@ type EducationFormProps = {
 };
 function Experienceform({experience,setExperience}:EducationFormProps) {
     const router=useRouter()
+  const [loading,setloading]=useState(false)
   
 
   // // universal handler
@@ -26,8 +27,11 @@ function Experienceform({experience,setExperience}:EducationFormProps) {
   }
 
   const SaveInLocalHost = () => {
-    
+    setTimeout(() => {
       localStorage.setItem("experiance", JSON.stringify(experience));
+    router.push('/education')
+      setloading(true)
+    }, 100);
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("experiance");
@@ -144,11 +148,13 @@ function Experienceform({experience,setExperience}:EducationFormProps) {
           >
             Back
           </Button>
-          <Link href={'/education'}>
-            <Button className='bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]' onClick={()=>SaveInLocalHost()}>
-              Next
+          
+            <Button className='bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]' onClick={()=>SaveInLocalHost()} disabled={loading}>
+              {loading==true?<Loader2/>:""}
+              
+              Next               
             </Button>
-          </Link>
+          
         </div>
       </div>
 

@@ -8,11 +8,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SelectDegree } from "./SelectDegree";
 import { EducationInfo } from "@/types/usestateTypes";
+import { Loader2 } from "lucide-react";
 
 
 
 function EducationForm() {
   const router = useRouter();
+  const [loading,setloading]=useState(false)
 
   const [formData, setFormData] = useState<EducationInfo>({
     schoolName: "",
@@ -29,7 +31,12 @@ function EducationForm() {
   };
 
 const SaveInLocalHost = () => {
+    setTimeout(() => {
       localStorage.setItem("education", JSON.stringify(formData));
+    
+      setloading(true)
+      router.push('/skills')
+    }, 100);
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("education");
@@ -113,11 +120,12 @@ const SaveInLocalHost = () => {
           >
             Back
           </Button>
-          <Link href={"/skills"}>
-            <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]" onClick={()=>SaveInLocalHost()}>
+        
+            <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]" disabled={loading} onClick={()=>SaveInLocalHost()}>
+              {loading==true?<Loader2/>:""}
               Next
             </Button>
-          </Link>
+          
         </div>
       </div>
 

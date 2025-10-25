@@ -15,6 +15,7 @@ function SummarySection() {
   const [summaryType, setSummaryType] = useState("");
   const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
   const handleGenerateAI = async () => {
     setSummaryType("")
@@ -37,7 +38,12 @@ function SummarySection() {
    }
   },[isLoading])
   const SaveInLocalHost = () => {
+    setTimeout(() => {
         localStorage.setItem("summary", JSON.stringify(summary));
+      setLoading2(true)
+      router.push('/showresume')
+      
+    }, 100);
       };
       useEffect(() => {
         const LocalstorageData = localStorage.getItem("summary");
@@ -103,11 +109,12 @@ function SummarySection() {
           >
             Back
           </Button>
-          <Link href={"/showresume"}>
-            <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[120px] h-[40px]" onClick={()=>SaveInLocalHost()}>
+          
+            <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[120px] h-[40px]" disabled={loading2==true} onClick={()=>SaveInLocalHost()}>
+              {loading2?<Loader2 className="animate-spin w-4 h-4" />:""}
               Create Resume
             </Button>
-          </Link>
+          
         </div>
       </div>
 
