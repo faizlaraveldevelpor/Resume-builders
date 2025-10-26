@@ -6,9 +6,9 @@ import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
-import { SortableBox } from '../Drageable';
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@/components/ui/button";
+import { SortableBox2 } from './templates/template2/Dragable2';
 
 type all = {
   dynamicName: number,
@@ -29,6 +29,7 @@ function Template1({
   const [Experience, setExperience] = useState<ExperienceData[]>();
   const [Education, setEducation] = useState<EducationInfo>();
   const [Drag, setDrag] = useState([
+    { id: "header" },
     { id: "persnalInformation" },
     { id: "skills" },
     { id: "experience" },
@@ -97,7 +98,7 @@ function Template1({
         className="max-w-3xl mx-auto bg-white text-black p-8 shadow-lg border overflow-y-scroll"
       >
         {/* Header */}
-        <div
+        {/* <div
           className={`text-center mb-6 relative ${hoverSections ? "border-2 border-blue-500 pl-2" : ""}`}
           onMouseEnter={() => sethoverSections(true)}
           onMouseLeave={() => sethoverSections(false)}
@@ -144,14 +145,14 @@ function Template1({
             {PersnalInformation?.email} | {PersnalInformation?.phone} |{" "}
             {PersnalInformation?.city}, {PersnalInformation?.country}
           </p>
-        </div>
+        </div> */}
 
         {/* Drag & Drop Section */}
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={Drag.map(b => b.id)} strategy={verticalListSortingStrategy}>
             <div className="flex flex-col gap-4 h-fit">
               {Drag.map((d) => (
-                <SortableBox
+                <SortableBox2
                   key={d.id}
                   id={d.id}
                   dynamicHeadingSize={dynamicHeadingSize}
@@ -162,6 +163,8 @@ function Template1({
                   Education={Education}
                   dynamicfontStyle={dynamicfontStyle}
                   dynamicSection={dynamicSection}
+                  dynamicName={dynamicName}
+                  PersnalInformation={PersnalInformation}
                 />
               ))}
             </div>

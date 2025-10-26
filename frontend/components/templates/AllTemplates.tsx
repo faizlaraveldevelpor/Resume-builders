@@ -1,8 +1,7 @@
 import React from 'react'
-import Template1 from './Template1'
-import Resume2 from './Template2'
-import Resume3 from './Template3'
-import Resume4 from './Template4'
+import Template1 from './template1/Template1'
+import Template2 from './template2/Template2'
+
 type all={
     dynamicName:number,
     dynamicHeadingSize:number,
@@ -18,28 +17,18 @@ function AllTemplates({dynamicName,dynamicHeadingSize,dynamictextSize,dynamicfon
         <Template1 dynamicName={dynamicName} dynamicHeadingSize={dynamicHeadingSize} dynamictextSize={dynamictextSize} dynamicfontStyle={dynamicfontStyle}/>
         </>
       )
-      break;
+      
       case 2:
         return(
           <>
-          <Resume2 dynamicName={dynamicName} dynamicHeadingSize={dynamicHeadingSize} dynamictextSize={dynamictextSize} dynamicfontStyle={dynamicfontStyle} />
+          <Template2 dynamicName={dynamicName} dynamicHeadingSize={dynamicHeadingSize} dynamictextSize={dynamictextSize} dynamicfontStyle={dynamicfontStyle} />
           </>
         )
-      case 3:
-        return(
-          <>
-          
-          <Resume3 dynamicName={dynamicName} dynamicHeadingSize={dynamicHeadingSize} dynamictextSize={dynamictextSize} dynamicfontStyle={dynamicfontStyle} />
-          </>
-        )
+      
     default:
       break;
   }
-  return (
-    <div>
-        <Resume4 dynamicName={dynamicName} dynamicHeadingSize={dynamicHeadingSize} dynamictextSize={dynamictextSize} dynamicfontStyle={dynamicfontStyle} />
-    </div>
-  )
+  
 }
 
 export default AllTemplates

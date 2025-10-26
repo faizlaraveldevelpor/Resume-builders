@@ -1,6 +1,6 @@
 "use client";
 import { useGetDocomentApiQuery } from "@/lib/docoment";
-import { DynamicSectionsType, EducationInfo, ExperienceData } from "@/types/usestateTypes";
+import { DynamicSectionsType, EducationInfo, ExperienceData,PersonalInfo } from "@/types/usestateTypes";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Dot, Grip, Pencil, Trash } from "lucide-react";
@@ -16,8 +16,10 @@ Experience:ExperienceData[]|undefined,
 Education:EducationInfo|undefined,
 dynamicfontStyle:string,
  dynamicSection:DynamicSectionsType[]|undefined
+ dynamicName:number
+ PersnalInformation:PersonalInfo|undefined
 }
-export function SortableBox({ id,dynamicHeadingSize,Summary,Skills,dynamictextSize,Experience,Education,dynamicfontStyle,dynamicSection }:allFieldsType) {
+export function SortableBox({ id,dynamicHeadingSize,Summary,Skills,dynamictextSize,Experience,Education,dynamicfontStyle,dynamicSection,dynamicName,PersnalInformation }:allFieldsType) {
   const {data}=useGetDocomentApiQuery("")
   console.log(data);
   
@@ -52,7 +54,63 @@ const DeleteDynamicSection=useCallback((sectionId:string)=>{
     >
         <div className=" text-black h-full " >
           
-            
+            <div>
+              {
+                id=="header"?<>
+                <div
+                          className={`text-center mb-6 relative ${hoverSections ? "border-2 border-blue-500 pl-2" : ""}`}
+                          onMouseEnter={() => sethoverSections(true)}
+                          onMouseLeave={() => sethoverSections(false)}
+                          ref={setActivatorNodeRef}
+              {...attributes}
+              {...listeners}
+                        >
+                          <div
+                            className={`absolute left-0 z-40 flex justify-between w-full ${hoverSections ? "block" : "hidden"}`}
+                          >
+                            <span className="bg-blue-500 text-white h-fit">
+                              <Grip className="p-1" />
+                            </span>
+                            <span className="bg-blue-500 text-white flex">
+                              <Link href={`/persnalinfo`}>
+                                <Pencil className="p-1 hover:scale-[1.2] cursor-pointer" />
+                              </Link>
+                              <Trash className="p-1 hover:scale-[1.2] cursor-pointer" />
+                            </span>
+                          </div>
+                
+                          <span className="flex justify-center mb-1 gap-x-2">
+                            <h1
+                              className={`font-bold ${dynamicfontStyle}`}
+                              style={{ fontSize: `${dynamicName}px` }}
+                            >
+                              {PersnalInformation?.firstName}
+                            </h1>
+                            <h1
+                              className={`font-bold ${dynamicfontStyle}`}
+                              style={{ fontSize: `${dynamicName}px` }}
+                            >
+                              {PersnalInformation?.lastName}
+                            </h1>
+                          </span>
+                
+                          <p
+                            className={`text-gray-600 ${dynamicfontStyle}`}
+                            style={{ fontSize: `${dynamictextSize}px` }}
+                          >
+                            {PersnalInformation?.Profession}
+                          </p>
+                          <p
+                            className={`text-gray-500 ${dynamicfontStyle}`}
+                            style={{ fontSize: `${dynamictextSize}px` }}
+                          >
+                            {PersnalInformation?.email} | {PersnalInformation?.phone} |{" "}
+                            {PersnalInformation?.city}, {PersnalInformation?.country}
+                          </p>
+                        </div>
+                </>:""
+              }
+            </div>
            <div>
             {
                 id=="persnalInformation"?<div className={`relative ${hoverSections==true?"border-2  border-blue-500 pl-2":""}`} onMouseEnter={()=>sethoverSections(true)} onMouseLeave={()=>sethoverSections(false)}>

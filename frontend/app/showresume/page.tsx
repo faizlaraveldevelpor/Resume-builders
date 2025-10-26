@@ -1,9 +1,8 @@
 "use client"
 import React, {  useState } from 'react'
-import Resume1 from '../../public/r1.png'
-import Resume2 from '../../public/r2.png'
-import Resume3 from '../../public/r3.png'
-import Resume4 from '../../public/r4.png'
+import Resume1 from '../../public/resume1.1.png'
+import Resume2 from '../../public/resume2.2.png'
+
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import {  Plus,  } from 'lucide-react'
@@ -14,7 +13,7 @@ import Link from 'next/link'
 import AllTemplates from '@/components/templates/AllTemplates'
 
 function Showresume() {
-const ResmeImage=[Resume1,Resume2,Resume3,Resume4]
+const ResmeImage=[Resume1,Resume2]
   const [dynamicName,setdynamicName]=useState<number>(30)
   const [dynamicHeadingSize,setdynamicHeadingSize]=useState<number>(20)
   const [dynamictextSize,setdynamictextSize]=useState<number>(14)
