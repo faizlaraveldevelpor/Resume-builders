@@ -47,7 +47,7 @@ function SummarySection() {
       };
       useEffect(() => {
         const LocalstorageData = localStorage.getItem("summary");
-       if (LocalstorageData) {
+       if (LocalstorageData!=="undefined") {
         setSummary(JSON.parse(LocalstorageData || ""));
           
        }

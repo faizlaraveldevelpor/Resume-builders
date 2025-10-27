@@ -81,22 +81,28 @@ setDrag((perv)=>perv.filter((data)=>data?.id!=="education"))
   // 💾 Load localStorage data
   useEffect(() => {
     const pers = localStorage.getItem("persnalInformation");
-    if (pers) setPersnalInformation(JSON.parse(pers));
+    if (pers !=="undefined") setPersnalInformation(JSON.parse(pers!));
 
     const sum = localStorage.getItem("summary");
-    if (sum) setSummary(JSON.parse(sum));
+    if (sum !=="undefined") setSummary(JSON.parse(sum!));
 
     const skl = localStorage.getItem("skills");
-    if (skl) setSkills(JSON.parse(skl));
+    if (skl !=="undefined") setSkills(JSON.parse(skl!));
 
     const exp = localStorage.getItem("experiance");
-    if (exp) setExperience(JSON.parse(exp));
+    if (exp!=="undefined") {
+      if (Array.isArray(exp)) {
+      setExperience(JSON.parse(exp || ""));
+        
+      }else{
+        setExperience(([JSON.parse(exp ||'')]))
+      }}
 
     const edu = localStorage.getItem("education");
-    if (edu) setEducation(JSON.parse(edu));
+    if (edu !=="undefined") setEducation(JSON.parse(edu!));
 
     const dyn = localStorage.getItem("dynamicsections");
-    if (dyn) setdynamicSection(JSON.parse(dyn));
+    if (dyn !=="undefined") setdynamicSection(JSON.parse(dyn!));
   }, []);
 
   // 🖨️ Ref for print area

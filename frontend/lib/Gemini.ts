@@ -26,10 +26,43 @@ export const GeminiApi = createApi({
         })
       }),
     }),
+    TextSection: builder.mutation<GeminiResType,string>({
+      query: (text:string) => ({
+        url:"?key=AIzaSyA2gOw0purjh3UEaGCNEprFUcjo3-r8lGo",
+        method:"POST",
+        body:JSON.stringify({
+            contents: [
+          {
+            parts: [
+              {
+                text: `Main aapko ek CV ka plain text dunga.  
+Aapko is text ko analyze karke alag-alag sections mein convert karna hai aur sirf ek JSON object return karna hai.  
+
+Rules:
+1. Sirf specified keys use karo.  
+2. Array aur string waise hi return karo.  
+3. Output sirf valid JSON object ho.  
+4. DO NOT wrap in triple backticks, quotes, or any extra text.  
+5. Do NOT add any explanations.  
+personalInformation (object): firstName, lastName, Profession, email, phone, address, city, country, zip  
+education (object): schoolName, degree, fieldOfStudy, city, state, graduationDate  
+experience (object): employer, jobTitle, jobDescription, city, state, startDate, endDate  
+skills (array)  
+summary (string)  
+\\, \n aisaa kuch nahi chahiye nahi honay chahiye
+Ab main CV ka text dunga. Sirf JSON object return karo.
+`+""+text
+              }
+            ]
+          }
+        ]
+        })
+      }),
+    }),
 
     
   }),
 });
 
 // Hooks auto-generate hotay hain 👇
-export const { useSummaryCreateMutation } = GeminiApi;
+export const { useSummaryCreateMutation,useTextSectionMutation } = GeminiApi;

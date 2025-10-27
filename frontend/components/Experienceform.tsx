@@ -28,15 +28,23 @@ function Experienceform({experience,setExperience}:EducationFormProps) {
 
   const SaveInLocalHost = () => {
     setTimeout(() => {
+      if (experience) {
       localStorage.setItem("experiance", JSON.stringify(experience));
+        
+      }
     router.push('/education')
       setloading(true)
     }, 100);
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("experiance");
-     if (LocalstorageData) {
+     if (LocalstorageData!=="undefined") {
+      if (Array.isArray(LocalstorageData)) {
       setExperience(JSON.parse(LocalstorageData || ""));
+        
+      }else{
+        setExperience(([JSON.parse(LocalstorageData ||'')]))
+      }
         
      }
       
@@ -150,7 +158,7 @@ function Experienceform({experience,setExperience}:EducationFormProps) {
           </Button>
           
             <Button className='bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]' onClick={()=>SaveInLocalHost()} disabled={loading}>
-              {loading==true?<Loader2/>:""}
+              {loading==true?<Loader2 className='animate-spin'/>:""}
               
               Next               
             </Button>

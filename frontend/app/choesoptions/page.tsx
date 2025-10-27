@@ -30,6 +30,7 @@ function Choesoptions() {
         </Link>
 
         {/* Upload Resume */}
+        <Link href={`/upload`}>
         <div className="w-[300px] h-[200px] border border-gray-200 bg-white flex flex-col items-center justify-center rounded-xl hover:border-[#1C74F8] hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
           <FileUp className="size-[80px] text-[#1C74F8] mb-3 transition-all duration-300 group-hover:scale-110" />
           <h3 className="font-semibold text-lg text-[#0B1739]">
@@ -39,6 +40,7 @@ function Choesoptions() {
             Instantly upload and enhance your existing resume with our builder!
           </p>
         </div>
+        </Link>
       </div>
 
       {/* Navigation Buttons */}

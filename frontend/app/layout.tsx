@@ -7,6 +7,8 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import Footer from "@/components/Footer";
 import { Provider } from "react-redux";
 import { store } from "@/utils/Store";
+import {Toa} from 'sann'
+import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Toaster/>
         <Provider store={store}>
         <SidebarProvider>
           <div className="w-full">

@@ -35,7 +35,7 @@ const [loading,setloading]=useState(false)
   };
   useEffect(() => {
     const LocalstorageData = localStorage.getItem("persnalInformation");
-if (LocalstorageData) {
+if (LocalstorageData!=="undefined") {
   setFormData(JSON.parse(LocalstorageData || ""));
 }
     
@@ -155,7 +155,7 @@ if (LocalstorageData) {
               className="bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]"
               onClick={() => SaveInLocalHost()}
            disabled={loading} >
-              {loading==true?<Loader2/>:""}
+              {loading==true?<Loader2 className="animate-spin"/>:""}
               Next
             </Button>
           

@@ -47,7 +47,7 @@ const SaveInLocalHost = () => {
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("skills");
-     if (LocalstorageData) {
+     if (LocalstorageData!=="undefined") {
       setAddedskillsFields(JSON.parse(LocalstorageData || ""));
         
      }
@@ -117,7 +117,7 @@ const SaveInLocalHost = () => {
 
           
             <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] w-[100px]" disabled={loading==true} onClick={()=>SaveInLocalHost()}>
-              {loading==true?<Loader2/>:""}
+              {loading==true?<Loader2 className="animate-spin"/>:""}
               Next
             </Button>
           

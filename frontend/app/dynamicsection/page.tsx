@@ -8,6 +8,8 @@ import List from "@editorjs/list";
 import type { DynamicSectionsType } from "@/types/usestateTypes";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function Page() {
   const editorRef = useRef<EditorJS | null>(null);
@@ -15,7 +17,7 @@ function Page() {
   const [dynamicSectionsLocalHostPush, setDynamicSectionsLocalHostPush] = useState<DynamicSectionsType[]>([]);
   const [dynamicSections, setDynamicSections] = useState<OutputData>();
   const [dynamicSectionName, setDynamicSectionName] = useState<string>();
-
+  const router=useRouter()
   useEffect(() => {
     if ( !editorRef.current) {
       const editor = (editorRef.current = new EditorJS({
@@ -44,11 +46,13 @@ function Page() {
       { Name: dynamicSectionName ?? "", dynamicSections, id: randomNumber },
     ]);
   };
+  
 
   useEffect(() => {
     if (dynamicSections) {
       localStorage.setItem("dynamicsections", JSON.stringify(dynamicSectionsLocalHostPush));
     }
+    toast("Save successfully")
   }, [dynamicSectionsLocalHostPush]);
 
   useEffect(() => {
@@ -78,7 +82,9 @@ function Page() {
           id="editorjs"
           className="border rounded-lg bg-white h-[250px] sm:h-[350px] md:h-[400px] overflow-y-auto p-3 sm:p-4"
         ></div>
-<div className="flex justify-center mt-4">
+<div className="flex justify-center mt-4 gap-x-8">
+            <Button variant="outline" className="cursor-pointer z-50" onClick={()=>router.back()}>Back</Button>
+
             <Button variant="outline" className="cursor-pointer z-50" onClick={()=>saveEditorDataBtn()}>Save Chnages</Button>
 
 </div>

@@ -7,12 +7,13 @@ import Header from "@editorjs/header";
 import List from "@editorjs/list";
 import type { DynamicSectionsType } from "@/types/usestateTypes";
 import { Input } from "@/components/ui/input";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 function Page() {
   const { id } = useParams();
 
-  
+  const router=useRouter()
   
   const editorRef = useRef<EditorJS | null>(null);
   const [dynamicSectionsLocalHostPush, setDynamicSectionsLocalHostPush] = useState<DynamicSectionsType[]>([]);
@@ -35,7 +36,6 @@ function Page() {
 
   // 🔹 Initialize Editor only when data exists
   useEffect(() => {
-    
     if (filterSection.length > 0 && filterSection[0]?.dynamicSections && !editorRef.current) {
       const editor = new EditorJS({
         holder: "editorjs",
@@ -80,10 +80,12 @@ function Page() {
       { Name: dynamicSectionName ?? "", dynamicSections, id:Number(id)  },
     ]);
     
-    localStorage.setItem("dynamicsections", JSON.stringify(dynamicSectionsLocalHostPush));
+    
+   
   };
 
- 
+ useEffect(()=>{localStorage.setItem("dynamicsections", JSON.stringify(dynamicSectionsLocalHostPush));
+    toast("save successfully")},[dynamicSectionsLocalHostPush])
 
   return (
     <div className="flex flex-col items-center justify-start w-full px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 py-6 space-y-4">
@@ -107,13 +109,21 @@ function Page() {
           className="h-[300px] sm:h-[350px] md:h-[400px] p-4 overflow-y-auto rounded-md focus:outline-none"
         ></div>
       </div>
-
+<div className="flex gap-x-5">
+<button
+        onClick={()=>{  router.back() }}
+        className="mt-4 px-6 py-2 cursor-pointer bg-white hover:bg-white text-black border font-medium rounded-md transition"
+      >
+        Back
+      </button>
       <button
-        onClick={()=>saveEditorDataBtn()}
+        onClick={()=>{saveEditorDataBtn() }}
         className="mt-4 px-6 py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition"
       >
         Update Section
       </button>
+</div>
+      
     </div>
   );
 }

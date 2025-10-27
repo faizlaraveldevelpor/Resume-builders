@@ -32,7 +32,10 @@ function EducationForm() {
 
 const SaveInLocalHost = () => {
     setTimeout(() => {
+      if (formData) {
       localStorage.setItem("education", JSON.stringify(formData));
+        
+      }
     
       setloading(true)
       router.push('/skills')
@@ -40,7 +43,7 @@ const SaveInLocalHost = () => {
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("education");
-     if (LocalstorageData) {
+     if (LocalstorageData!=="undefined") {
       setFormData(JSON.parse(LocalstorageData || ""));
         
      }
@@ -122,7 +125,7 @@ const SaveInLocalHost = () => {
           </Button>
         
             <Button className="bg-[#1C74F8] hover:bg-[#0d62e1] cursor-pointer w-[100px] h-[40px]" disabled={loading} onClick={()=>SaveInLocalHost()}>
-              {loading==true?<Loader2/>:""}
+              {loading==true?<Loader2 className="animate-spin"/>:""}
               Next
             </Button>
           
