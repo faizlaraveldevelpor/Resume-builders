@@ -2,6 +2,7 @@
 import React, {  useState } from 'react'
 import Resume1 from '../../public/resume1.1.png'
 import Resume2 from '../../public/resume2.2.png'
+import Resume3 from '../../public/resume3.3.png'
 
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -13,7 +14,7 @@ import Link from 'next/link'
 import AllTemplates from '@/components/templates/AllTemplates'
 
 function Showresume() {
-const ResmeImage=[Resume1,Resume2]
+const ResmeImage=[Resume1,Resume2,Resume3]
   const [dynamicName,setdynamicName]=useState<number>(30)
   const [dynamicHeadingSize,setdynamicHeadingSize]=useState<number>(20)
   const [dynamictextSize,setdynamictextSize]=useState<number>(14)

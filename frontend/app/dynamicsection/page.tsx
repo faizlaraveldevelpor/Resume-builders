@@ -49,10 +49,11 @@ function Page() {
   
 
   useEffect(() => {
-    if (dynamicSections) {
+    if (dynamicSectionsLocalHostPush?.length>0) {
       localStorage.setItem("dynamicsections", JSON.stringify(dynamicSectionsLocalHostPush));
-    }
     toast("Save successfully")
+
+    }
   }, [dynamicSectionsLocalHostPush]);
 
   useEffect(() => {

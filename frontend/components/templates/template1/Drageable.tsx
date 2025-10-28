@@ -45,14 +45,15 @@ const DeleteDynamicSection=useCallback((sectionId:string)=>{
   const FilterDeletedDynamicSection=(dynamicSection ?? []).filter((data)=>data?.id?.toString()!==sectionId);
   localStorage.setItem("dynamicsections",JSON.stringify(FilterDeletedDynamicSection));
 },[dynamicSection]);
-
+console.log(Experience)
   return (
     <div
       ref={setNodeRef}
       style={style}
       className="  cursor-grab active:cursor-grabbing "
     >
-        <div className=" text-black h-full " >
+      <div className="flex w-full">
+         <div className=" text-black flex flex-col h-full w-full  " >
           
             <div>
               {
@@ -319,6 +320,12 @@ const DeleteDynamicSection=useCallback((sectionId:string)=>{
         
         )}
         </div>
+      <div className="">
+
+      </div>
+
+      </div>
+       
       
     </div>
   );

@@ -7,6 +7,7 @@ import ResumeNavigater from "../public/Resume navigater 1.png";
 import Image from "next/image";
 import { PersonalInfo } from "@/types/usestateTypes";
 import {Loader2} from 'lucide-react'
+
 function PersonalInfoForm() {
   const router = useRouter();
 
@@ -19,7 +20,8 @@ function PersonalInfoForm() {
     zip: "",
     email: "",
     phone: "",
-    Profession:""
+    Profession:"",
+    
   });
 const [loading,setloading]=useState(false)
   // universal onChange handler
@@ -35,11 +37,12 @@ const [loading,setloading]=useState(false)
   };
   useEffect(() => {
     const LocalstorageData = localStorage.getItem("persnalInformation");
-if (LocalstorageData!=="undefined") {
+if (LocalstorageData!=="undefined"&&LocalstorageData!==null) {
   setFormData(JSON.parse(LocalstorageData || ""));
 }
     
   }, []);
+  
   return (
     <div className="w-full flex md:flex-row flex-col gap-x-12">
       <div className="md:w-[70%] w-full">

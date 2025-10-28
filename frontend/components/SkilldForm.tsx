@@ -47,7 +47,7 @@ const SaveInLocalHost = () => {
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("skills");
-     if (LocalstorageData!=="undefined") {
+     if (LocalstorageData!=="undefined"&&LocalstorageData!==null) {
       setAddedskillsFields(JSON.parse(LocalstorageData || ""));
         
      }

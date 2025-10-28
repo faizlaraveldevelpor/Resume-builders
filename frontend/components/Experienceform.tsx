@@ -38,13 +38,17 @@ function Experienceform({experience,setExperience}:EducationFormProps) {
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("experiance");
-     if (LocalstorageData!=="undefined") {
-      if (Array.isArray(LocalstorageData)) {
-      setExperience(JSON.parse(LocalstorageData || ""));
-        
-      }else{
-        setExperience(([JSON.parse(LocalstorageData ||'')]))
-      }
+     if (LocalstorageData!=="undefined"&&LocalstorageData!==null) {
+      if (LocalstorageData) {
+  const parsed = JSON.parse(LocalstorageData);
+
+  if (Array.isArray(parsed)) {
+    setExperience(parsed);
+  } else {
+    setExperience([parsed]);
+  }
+}
+
         
      }
       
@@ -56,13 +60,14 @@ function Experienceform({experience,setExperience}:EducationFormProps) {
      
         
         }
-         
+         console.log(experience)
     
   return (
  <div className='w-full flex md:flex-row flex-col gap-x-12 mt-10'>
       <div className='md:w-[70%] w-full'>
         {
           experience?.map((data,i)=>{
+            console.log(data)
           return(
             <>
             <div key={i}>

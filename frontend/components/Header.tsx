@@ -32,10 +32,12 @@ function Header() {
                 Login
               </Button>
               </Link> */}
+              <Link href={`/choesoptions`}>
               
               <Button className="bg-[#0061F2] hover:bg-[#004bd4] text-white cursor-pointer shadow-sm transition-all hover:scale-105">
                 Build Resume
               </Button>
+              </Link>
             </div>
           </div>
 

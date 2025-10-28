@@ -4,7 +4,7 @@ import { DynamicSectionsType, EducationInfo, ExperienceData, PersonalInfo } from
 import { Grip, Pencil, Trash } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
+import { SortableContext, verticalListSortingStrategy, arrayMove, rectSortingStrategy } from "@dnd-kit/sortable";
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableBox } from './Drageable';
 import { useReactToPrint } from "react-to-print";
@@ -61,6 +61,8 @@ function Template1({
   // 💾 Load localStorage data
   useEffect(() => {
     const pers = localStorage.getItem("persnalInformation");
+    console.log(pers);
+    
     if (pers !=="undefined") setPersnalInformation(JSON.parse(pers!));
 
     const sum = localStorage.getItem("summary");
@@ -70,12 +72,13 @@ function Template1({
     if (skl !=="undefined") setSkills(JSON.parse(skl!));
 
     const exp = localStorage.getItem("experiance");
-     if (exp!=="undefined") {
-      if (Array.isArray(exp)) {
-      setExperience(JSON.parse(exp || ""));
+    const parse=JSON.parse(exp || "")
+     if (exp!=="undefined"&& pers!==null) {
+      if (Array.isArray(parse)) {
+      setExperience(parse);
         
       }else{
-        setExperience(([JSON.parse(exp ||'')]))
+        setExperience(([parse]))
       }}
 
     const edu = localStorage.getItem("education");
@@ -103,59 +106,11 @@ function Template1({
         ref={componentRef}
         className="max-w-3xl mx-auto bg-white text-black p-8 shadow-lg border overflow-y-scroll"
       >
-        {/* Header */}
-        {/* <div
-          className={`text-center mb-6 relative ${hoverSections ? "border-2 border-blue-500 pl-2" : ""}`}
-          onMouseEnter={() => sethoverSections(true)}
-          onMouseLeave={() => sethoverSections(false)}
-        >
-          <div
-            className={`absolute left-0 z-40 flex justify-between w-full ${hoverSections ? "block" : "hidden"}`}
-          >
-            <span className="bg-blue-500 text-white h-fit">
-              <Grip className="p-1" />
-            </span>
-            <span className="bg-blue-500 text-white flex">
-              <Link href={`/persnalinfo`}>
-                <Pencil className="p-1 hover:scale-[1.2] cursor-pointer" />
-              </Link>
-              <Trash className="p-1 hover:scale-[1.2] cursor-pointer" />
-            </span>
-          </div>
-
-          <span className="flex justify-center mb-1 gap-x-2">
-            <h1
-              className={`font-bold ${dynamicfontStyle}`}
-              style={{ fontSize: `${dynamicName}px` }}
-            >
-              {PersnalInformation?.firstName}
-            </h1>
-            <h1
-              className={`font-bold ${dynamicfontStyle}`}
-              style={{ fontSize: `${dynamicName}px` }}
-            >
-              {PersnalInformation?.lastName}
-            </h1>
-          </span>
-
-          <p
-            className={`text-gray-600 ${dynamicfontStyle}`}
-            style={{ fontSize: `${dynamictextSize}px` }}
-          >
-            {PersnalInformation?.Profession}
-          </p>
-          <p
-            className={`text-gray-500 ${dynamicfontStyle}`}
-            style={{ fontSize: `${dynamictextSize}px` }}
-          >
-            {PersnalInformation?.email} | {PersnalInformation?.phone} |{" "}
-            {PersnalInformation?.city}, {PersnalInformation?.country}
-          </p>
-        </div> */}
+      
 
         {/* Drag & Drop Section */}
-        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={Drag.map(b => b.id)} strategy={verticalListSortingStrategy}>
+        <DndContext  collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={Drag.map(b => b.id)} strategy={rectSortingStrategy}>
             <div className="flex flex-col gap-4 h-fit">
               {Drag.map((d) => (
                 <SortableBox

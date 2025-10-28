@@ -5,7 +5,6 @@ import HomeSlider from "@/components/slider/HomeSlider";
 // import { useSummaryCreateMutation } from "@/lib/Gemini";
 // import { useEffect } from "react";
 export default function Home() {
-
   return (
    
     <>

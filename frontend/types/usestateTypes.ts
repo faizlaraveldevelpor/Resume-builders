@@ -10,6 +10,7 @@ export interface PersonalInfo {
   email: string
   phone: string
   Profession:string
+  
 }
 export interface ExperienceData {
   employer: string

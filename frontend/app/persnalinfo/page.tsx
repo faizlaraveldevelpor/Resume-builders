@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+import React, { useRef, useState } from "react";
 import profileImage from "../../public/profile image.jpg";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import PersnalInfoForm from "@/components/PersnalInfoForm";
 
 function Persnalinfo() {
+  const imgRef=useRef<HTMLInputElement>(null)
+  const [img,setimg]=useState<File|null>()
   return (
     <div className="flex flex-col items-center">
       {/* Header Section */}
@@ -32,8 +34,14 @@ function Persnalinfo() {
             />
             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border border-white"></div>
           </div>
+          <input type="file" ref={imgRef} onChange={(e)=>e.target.files?setimg(e.target.files[0]):""}/>
+          <Button className="bg-[#1C74F8] hover:bg-[#0e64e6] cursor-pointer text-white font-medium px-5" onClick={()=>{
+              if (imgRef.current) {
+              imgRef.current.click()
 
-          <Button className="bg-[#1C74F8] hover:bg-[#0e64e6] cursor-pointer text-white font-medium px-5">
+              }
+// setimg(imgRef.current)
+          }}>
             Upload Photo
           </Button>
         </div>
@@ -41,7 +49,7 @@ function Persnalinfo() {
 
       {/* Form Section */}
       <section className="p-8 px-6 md:px-16 2xl:w-[1200px] w-full bg-white rounded-2xl shadow-md mt-8 border border-gray-100">
-        <PersnalInfoForm />
+        <PersnalInfoForm  />
       </section>
     </div>
   );

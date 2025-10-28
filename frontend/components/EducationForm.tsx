@@ -43,10 +43,15 @@ const SaveInLocalHost = () => {
     };
     useEffect(() => {
       const LocalstorageData = localStorage.getItem("education");
-     if (LocalstorageData!=="undefined") {
-      setFormData(JSON.parse(LocalstorageData || ""));
-        
-     }
+          if (LocalstorageData) {
+  const parsed = JSON.parse(LocalstorageData);
+
+  if (Array.isArray(parsed)) {
+    setFormData(parsed[0]);
+  } else {
+    setFormData(parsed);
+  }
+}
       
     }, []);
   return (

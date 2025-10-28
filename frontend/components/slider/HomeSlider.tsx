@@ -3,11 +3,14 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Image from "next/image";
-import Resume1 from "../../public/resume1.png";
+import Resume1 from "../../public/resume1.1.png";
+import Resume2 from "../../public/resume2.2.png";
+import Resume3 from "../../public/resume3.3.png";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
 export default function HomeSlider() {
+  const CvImages=[Resume1,Resume2,Resume3,Resume1,Resume2,Resume3,Resume1,Resume2,Resume3]
   return (
     <div className="w-full mx-auto z-50 py-12 bg-gradient-to-b from-[#F9FBFF] to-[#F2F6FC]">
       <div className="text-center mb-8">
@@ -30,12 +33,12 @@ export default function HomeSlider() {
         loop={true}
         className="rounded-2xl shadow-lg px-4 "
       >
-        {Array.from({ length: 6 }).map((_, i) => (
+        {CvImages.map((data, i) => (
           <SwiperSlide key={i}>
             <div className="relative group overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl ">
               {/* Image */}
               <Image
-                src={Resume1}
+                src={data}
                 alt={`Resume Template ${i + 1}`}
                 width={400}
                 height={500}

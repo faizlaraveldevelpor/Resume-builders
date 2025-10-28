@@ -90,12 +90,13 @@ setDrag((perv)=>perv.filter((data)=>data?.id!=="education"))
     if (skl !=="undefined") setSkills(JSON.parse(skl!));
 
     const exp = localStorage.getItem("experiance");
-    if (exp!=="undefined") {
-      if (Array.isArray(exp)) {
-      setExperience(JSON.parse(exp || ""));
+    const parse=JSON.parse(exp || "")
+     if (exp!=="undefined"&& pers!==null) {
+      if (Array.isArray(parse)) {
+      setExperience(parse);
         
       }else{
-        setExperience(([JSON.parse(exp ||'')]))
+        setExperience(([parse]))
       }}
 
     const edu = localStorage.getItem("education");
