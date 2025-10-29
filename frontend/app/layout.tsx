@@ -7,7 +7,6 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import Footer from "@/components/Footer";
 import { Provider } from "react-redux";
 import { store } from "@/utils/Store";
-import {Toa} from 'sann'
 import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",

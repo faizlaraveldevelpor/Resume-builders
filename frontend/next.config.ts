@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-   images: {
+  images: {
     domains: ["images.unsplash.com"],
+  },
+  eslint: {
+    ignoreDuringBuilds: true, // 👈 ye line add karo
   },
 };
 

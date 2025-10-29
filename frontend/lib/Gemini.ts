@@ -13,7 +13,7 @@ export const GeminiApi = createApi({
       query: (text:string) => (
         
         {
-        url:`${process.env.NEXT_PUBLIC_APIKEY}`,
+        url:'?key=AIzaSyA2gOw0purjh3UEaGCNEprFUcjo3-r8lGo',
         method:"POST",
         body:JSON.stringify({
             contents: [
@@ -30,7 +30,7 @@ export const GeminiApi = createApi({
     }),
     TextSection: builder.mutation<GeminiResType,string>({
       query: (text:string) => ({
-        url:`${process.env.NEXT_PUBLIC_APIKEY}`,
+        url:'?key=AIzaSyA2gOw0purjh3UEaGCNEprFUcjo3-r8lGo',
         method:"POST",
         body:JSON.stringify({
             contents: [

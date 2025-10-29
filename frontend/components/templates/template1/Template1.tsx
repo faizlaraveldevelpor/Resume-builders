@@ -5,7 +5,7 @@ import { Grip, Pencil, Trash } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { SortableContext, verticalListSortingStrategy, arrayMove, rectSortingStrategy } from "@dnd-kit/sortable";
-import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
+import { closestCenter, DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableBox } from './Drageable';
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@/components/ui/button";
